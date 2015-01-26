@@ -1,93 +1,57 @@
 { "name" : "Africa", "iso2" : null, "iso3" : "AFR", "area" : null, "iso_num" : null }
 { "name" : "Latin America & Caribbean", "iso2" : null, "iso3" : "LCN", "area" : null, "iso_num" : null }
-{ "name" : "North America", "iso2" : null, "iso3" : "NAC", "area" : null, "iso_num" : null }
 { "name" : "East Asia & Pacific", "iso2" : null, "iso3" : "EAS", "area" : null, "iso_num" : null }
 { "name" : "Europe & Central Asia", "iso2" : null, "iso3" : "ECS", "area" : null, "iso_num" : null }
 { "name" : "Middle East", "iso2" : null, "iso3" : "MEA", "area" : null, "iso_num" : null }
 { "name" : "South Asia", "iso2" : null, "iso3" : "SAS", "area" : null, "iso_num" : null }
-{ "name" : "South Africa", "iso2" : "ZA", "iso3" : "ZAF", "area" : "AFR", "income" : "UMC", "iso_num" : "710" }
-{ "name" : "Mauritius", "iso2" : "MU", "iso3" : "MUS", "area" : "AFR", "income" : "UMC", "iso_num" : "480"}
-{ "name" : "Tunisia", "iso2" : "TN", "iso3" : "TUN", "area" : "AFR", "income" : "UMC", "iso_num" : "788" }
-{ "name" : "Kenya", "iso2" : "KE", "iso3" : "KEN", "area" : "AFR", "income" : "LIC", "iso_num" : "404" }
-{ "name" : "Morocco", "iso2" : "MA", "iso3" : "MAR", "area" : "AFR", "income" : "LMC", "iso_num" : "504" }
-{ "name" : "Ghana", "iso2" : "GH", "iso3" : "GHA", "area" : "AFR", "income" : "LMC", "iso_num" : "288" }
-{ "name" : "United Republic Of Tanzania", "iso2" : "TZ", "iso3" : "TZA", "area" : "AFR", "income" : "LIC", "iso_num" : "834" }
-{ "name" : "Namibia", "iso2" : "NA", "iso3" : "NAM", "area" : "AFR", "income" : "UMC", "iso_num" : "516" }
-{ "name" : "Senegal", "iso2" : "SN", "iso3" : "SEN", "area" : "AFR", "income" : "LMC", "iso_num" : "686" }
-{ "name" : "Egypt", "iso2" : "EG", "iso3" : "EGY", "area" : "AFR", "income" : "LMC", "iso_num" : "818" }
-{ "name" : "Uganda", "iso2" : "UG", "iso3" : "UGA", "area" : "AFR", "income" : "LIC", "iso_num" : "800" }
-{ "name" : "Zambia", "iso2" : "ZM", "iso3" : "ZMB", "area" : "AFR", "income" : "LMC", "iso_num" : "894" }
-{ "name" : "Nigeria", "iso2" : "NG", "iso3" : "NGA", "area" : "AFR", "income" : "LMC", "iso_num" : "566" }
-{ "name" : "Botswana", "iso2" : "BW", "iso3" : "BWA", "area" : "AFR", "income" : "UMC", "iso_num" : "072" }
-{ "name" : "Benin", "iso2" : "BJ", "iso3" : "BEN", "area" : "AFR", "income" : "LIC", "iso_num" : "204" }
-{ "name" : "Burkina Faso", "iso2" : "BF", "iso3" : "BFA", "area" : "AFR", "income" : "LIC", "iso_num" : "854" }
-{ "name" : "Malawi", "iso2" : "MW", "iso3" : "MWI", "area" : "AFR", "income" : "LIC", "iso_num" : "454" }
-{ "name" : "Rwanda", "iso2" : "RW", "iso3" : "RWA", "area" : "AFR", "income" : "LIC", "iso_num" : "646" }
-{ "name" : "Cameroon", "iso2" : "CM", "iso3" : "CMR", "area" : "AFR", "income" : "LMC", "iso_num" : "120" }
-{ "name" : "Zimbabwe", "iso2" : "ZW", "iso3" : "ZWE", "area" : "AFR", "income" : "LIC", "iso_num" : "716" }
-{ "name" : "Mali", "iso2" : "ML", "iso3" : "MLI", "area" : "AFR", "income" : "LIC", "iso_num" : "466" }
-{ "name" : "Ethiopia", "iso2" : "ET", "iso3" : "ETH", "area" : "AFR", "income" : "LIC", "iso_num" : "231" }
-{ "name" : "United States Of America", "iso2" : "US", "iso3" : "USA", "area" : "NAC", "income" : "OEC", "iso_num" : "840" }
-{ "name" : "Canada", "iso2" : "CA", "iso3" : "CAN", "area" : "NAC", "income" : "OEC", "iso_num" : "124" }
-{ "name" : "Chile", "iso2" : "CL", "iso3" : "CHL", "area" : "LCN", "income" : "UMC", "iso_num" : "152" }
-{ "name" : "Uruguay", "iso2" : "UY", "iso3" : "URY", "area" : "LCN", "income" : "UMC", "iso_num" : "858" }
-{ "name" : "Mexico", "iso2" : "MX", "iso3" : "MEX", "area" : "LCN", "income" : "UMC", "iso_num" : "484" }
-{ "name" : "Colombia", "iso2" : "CO", "iso3" : "COL", "area" : "LCN", "income" : "UMC", "iso_num" : "170" }
-{ "name" : "Brazil", "iso2" : "BR", "iso3" : "BRA", "area" : "LCN", "income" : "UMC", "iso_num" : "076" }
-{ "name" : "Costa Rica", "iso2" : "CR", "iso3" : "CRI", "area" : "LCN", "income" : "UMC", "iso_num" : "188" }
-{ "name" : "Argentina", "iso2" : "AR", "iso3" : "ARG", "area" : "LCN", "income" : "UMC", "iso_num" : "032" }
-{ "name" : "Peru", "iso2" : "PE", "iso3" : "PER", "area" : "LCN", "income" : "UMC", "iso_num" : "604" }
-{ "name" : "Ecuador", "iso2" : "EC", "iso3" : "ECU", "area" : "LCN", "income" : "UMC", "iso_num" : "218" }
-{ "name" : "Jamaica", "iso2" : "JM", "iso3" : "JAM", "area" : "LCN", "income" : "UMC", "iso_num" : "388" }
-{ "name" : "Venezuela (Bolivarian Republic Of)", "iso2" : "VE", "iso3" : "VEN", "area" : "LCN", "income" : "UMC", "iso_num" : "862" }
-{ "name" : "New Zealand", "iso2" : "NZ", "iso3" : "NZL", "area" : "EAS", "income" : "OEC", "iso_num" : "554" }
-{ "name" : "Korea (Rep. of)", "iso2" : "KR", "iso3" : "KOR", "area" : "EAS", "income" : "OEC", "iso_num" : "410" }
-{ "name" : "Australia", "iso2" : "AU", "iso3" : "AUS", "area" : "EAS", "income" : "OEC", "iso_num" : "036" }
-{ "name" : "Japan", "iso2" : "JP", "iso3" : "JPN", "area" : "EAS", "income" : "OEC", "iso_num" : "392" }
-{ "name" : "Singapore", "iso2" : "SG", "iso3" : "SGP", "area" : "EAS", "income" : "NOC", "iso_num" : "702" }
-{ "name" : "Malaysia", "iso2" : "MY", "iso3" : "MYS", "area" : "EAS", "income" : "UMC", "iso_num" : "458" }
-{ "name" : "Philippines", "iso2" : "PH", "iso3" : "PHL", "area" : "EAS", "income" : "LMC", "iso_num" : "608" }
-{ "name" : "Thailand", "iso2" : "TH", "iso3" : "THA", "area" : "EAS", "income" : "UMC", "iso_num" : "764" }
-{ "name" : "Indonesia", "iso2" : "ID", "iso3" : "IDN", "area" : "EAS", "income" : "LMC", "iso_num" : "360" }
-{ "name" : "India", "iso2" : "IN", "iso3" : "IND", "area" : "SAS", "income" : "LMC", "iso_num" : "356" }
-{ "name" : "China", "iso2" : "CN", "iso3" : "CHN", "area" : "EAS", "income" : "UMC", "iso_num" : "156" }
-{ "name" : "Bangladesh", "iso2" : "BD", "iso3" : "BGD", "area" : "SAS", "income" : "LIC", "iso_num" : "050" }
-{ "name" : "Nepal", "iso2" : "NP", "iso3" : "NPL", "area" : "SAS", "income" : "LIC", "iso_num" : "524" }
-{ "name" : "Viet Nam", "iso2" : "VN", "iso3" : "VNM", "area" : "EAS", "income" : "LMC", "iso_num" : "704" }
-{ "name" : "Pakistan", "iso2" : "PK", "iso3" : "PAK", "area" : "SAS", "income" : "LMC", "iso_num" : "586" }
-{ "name" : "Sweden", "iso2" : "SE", "iso3" : "SWE", "area" : "ECS", "income" : "OEC", "iso_num" : "752" }
-{ "name" : "Norway", "iso2" : "NO", "iso3" : "NOR", "area" : "ECS", "income" : "OEC", "iso_num" : "578" }
-{ "name" : "United Kingdom Of Great Britain And Northern Ireland", "iso2" : "GB", "iso3" : "GBR", "area" : "ECS", "income" : "OEC", "iso_num" : "826" }
-{ "name" : "Denmark", "iso2" : "DK", "iso3" : "DNK", "area" : "ECS", "income" : "OEC", "iso_num" : "208" }
-{ "name" : "Finland", "iso2" : "FI", "iso3" : "FIN", "area" : "ECS", "income" : "OEC", "iso_num" : "246" }
-{ "name" : "Iceland", "iso2" : "IS", "iso3" : "ISL", "area" : "ECS", "income" : "OEC", "iso_num" : "352" }
-{ "name" : "France", "iso2" : "FR", "iso3" : "FRA", "area" : "ECS", "income" : "OEC", "iso_num" : "250" }
-{ "name" : "Netherlands", "iso2" : "NL", "iso3" : "NLD", "area" : "ECS", "income" : "OEC", "iso_num" : "528" }
-{ "name" : "Austria", "iso2" : "AT", "iso3" : "AUT", "area" : "ECS", "income" : "OEC", "iso_num" : "040" }
-{ "name" : "Germany", "iso2" : "DE", "iso3" : "DEU", "area" : "ECS", "income" : "OEC", "iso_num" : "276" }
-{ "name" : "Switzerland", "iso2" : "CH", "iso3" : "CHE", "area" : "ECS", "income" : "OEC", "iso_num" : "756" }
-{ "name" : "Estonia", "iso2" : "EE", "iso3" : "EST", "area" : "ECS", "income" : "OEC", "iso_num" : "233" }
-{ "name" : "Ireland", "iso2" : "IE", "iso3" : "IRL", "area" : "ECS", "income" : "OEC", "iso_num" : "372" }
-{ "name" : "Belgium", "iso2" : "BE", "iso3" : "BEL", "area" : "ECS", "income" : "OEC", "iso_num" : "056" }
-{ "name" : "Poland", "iso2" : "PL", "iso3" : "POL", "area" : "ECS", "income" : "OEC", "iso_num" : "616" }
-{ "name" : "Italy", "iso2" : "IT", "iso3" : "ITA", "area" : "ECS", "income" : "OEC", "iso_num" : "380" }
-{ "name" : "Portugal", "iso2" : "PT", "iso3" : "PRT", "area" : "ECS", "income" : "OEC", "iso_num" : "620" }
-{ "name" : "Czech Republic", "iso2" : "CZ", "iso3" : "CZE", "area" : "ECS", "income" : "OEC", "iso_num" : "203" }
-{ "name" : "Greece", "iso2" : "GR", "iso3" : "GRC", "area" : "ECS", "income" : "OEC", "iso_num" : "300" }
-{ "name" : "Spain", "iso2" : "ES", "iso3" : "ESP", "area" : "ECS", "income" : "OEC", "iso_num" : "724" }
-{ "name" : "Russian Federation", "iso2" : "RU", "iso3" : "RUS", "area" : "ECS", "income" : "UMC", "iso_num" : "643" }
-{ "name" : "Hungary", "iso2" : "HU", "iso3" : "HUN", "area" : "ECS", "income" : "OEC", "iso_num" : "348" }
-{ "name" : "Turkey", "iso2" : "TR", "iso3" : "TUR", "area" : "ECS", "income" : "UMC", "iso_num" : "792" }
-{ "name" : "Israel", "iso2" : "IL", "iso3" : "ISR", "area" : "MEA", "income" : "OEC", "iso_num" : "376" }
-{ "name" : "United Arab Emirates", "iso2" : "AE", "iso3" : "ARE", "area" : "MEA", "income" : "NOC", "iso_num" : "784" }
-{ "name" : "Kazakhstan", "iso2" : "KZ", "iso3" : "KAZ", "area" : "ECS", "income" : "UMC", "iso_num" : "398" }
-{ "name" : "Bahrain", "iso2" : "BH", "iso3" : "BHR", "area" : "MEA", "income" : "NOC", "iso_num" : "048" }
-{ "name" : "Qatar", "iso2" : "QA", "iso3" : "QAT", "area" : "MEA", "income" : "NOC", "iso_num" : "634" }
-{ "name" : "Jordan", "iso2" : "JO", "iso3" : "JOR", "area" : "MEA", "income" : "UMC", "iso_num" : "400" }
-{ "name" : "Saudi Arabia", "iso2" : "SA", "iso3" : "SAU", "area" : "MEA", "income" : "NOC", "iso_num" : "682" }
-{ "name" : "Yemen", "iso2" : "YE", "iso3" : "YEM", "area" : "MEA", "income" : "LMC", "iso_num" : "887" }
-{ "name" : "Haiti", "iso2" : "HT", "iso3" : "HTI", "area" : "LCN", "income" : "LIC", "iso_num" : "332" }
-{ "name" : "Mozambique", "iso2" : "MZ", "iso3" : "MOZ", "area" : "AFR", "income" : "LIC", "iso_num" : "508" }
-{ "name" : "Myanmar", "iso2" : "MM", "iso3" : "MMR", "area" : "SAS", "income" : "LIC", "iso_num" : "104" }
-{ "name" : "Sierra Leone", "iso2" : "SL", "iso3" : "SLE", "area" : "AFR", "income" : "LIC", "iso_num" : "694" }
-{ "name" : "Ukraine", "iso2" : "UA", "iso3" : "UKR", "area" : "ECS", "income" : "LMC", "iso_num" : "804" }
+{ "name": "South Africa", "short_name": "South Africa", "iso2" : "ZA", "iso3" : "ZAF", "area" : "AFR", "income" : "UMC", "iso_num" : "710", "type" : "Emerging" }
+{ "name": "Mauritius", "short_name": "Mauritius", "iso2" : "MU", "iso3" : "MUS", "area" : "AFR", "income" : "UMC", "iso_num" : "480", "type" : "Emerging" }
+{ "name": "Tunisia", "short_name": "Tunisia", "iso2" : "TN", "iso3" : "TUN", "area" : "AFR", "income" : "UMC", "iso_num" : "788", "type" : "Emerging" }
+{ "name": "Kenya", "short_name": "Kenya", "iso2" : "KE", "iso3" : "KEN", "area" : "AFR", "income" : "LIC", "iso_num" : "404", "type" : "Developing" }
+{ "name": "Morocco", "short_name": "Morocco", "iso2" : "MA", "iso3" : "MAR", "area" : "AFR", "income" : "LMC", "iso_num" : "504", "type" : "Developing" }
+{ "name": "Gambia", "short_name": "Gambia", "iso2" : "GM", "iso3" : "GMB", "area" : "AFR", "income" : "LIC", "iso_num" : "270", "type" : "Developing" }
+{ "name": "Ghana", "short_name": "Ghana", "iso2" : "GH", "iso3" : "GHA", "area" : "AFR", "income" : "LMC", "iso_num" : "288", "type" : "Developing" }
+{ "name": "Dominican Republic", "short_name": "Dominican Republic", "iso2" : "DO", "iso3" : "DOM", "area" : "LCN", "income" : "UMC", "iso_num" : "214", "type" : "Emerging" }
+{ "name": "United Republic Of Tanzania", "short_name": "Tanzania", "iso2" : "TZ", "iso3" : "TZA", "area" : "AFR", "income" : "LIC", "iso_num" : "834" , "type" : "Developing"}
+{ "name": "Namibia", "short_name": "Namibia", "iso2" : "NA", "iso3" : "NAM", "area" : "AFR", "income" : "UMC", "iso_num" : "516", "type" : "Emerging" }
+{ "name": "Senegal", "short_name": "Senegal", "iso2" : "SN", "iso3" : "SEN", "area" : "AFR", "income" : "LMC", "iso_num" : "686", "type" : "Developing" }
+{ "name": "Egypt", "short_name": "Egypt", "iso2" : "EG", "iso3" : "EGY", "area" : "AFR", "income" : "LMC", "iso_num" : "818", "type" : "Developing" }
+{ "name": "Uganda", "short_name": "Uganda", "iso2" : "UG", "iso3" : "UGA", "area" : "AFR", "income" : "LIC", "iso_num" : "800", "type" : "Developing" }
+{ "name": "Zambia", "short_name": "Zambia", "iso2" : "ZM", "iso3" : "ZMB", "area" : "AFR", "income" : "LMC", "iso_num" : "894", "type" : "Developing" }
+{ "name": "Nigeria", "short_name": "Nigeria", "iso2" : "NG", "iso3" : "NGA", "area" : "AFR", "income" : "LMC", "iso_num" : "566", "type" : "Developing" }
+{ "name": "Botswana", "short_name": "Botswana", "iso2" : "BW", "iso3" : "BWA", "area" : "AFR", "income" : "UMC", "iso_num" : "072", "type" : "Emerging" }
+{ "name": "Benin", "short_name": "Benin", "iso2" : "BJ", "iso3" : "BEN", "area" : "AFR", "income" : "LIC", "iso_num" : "204", "type" : "Developing" }
+{ "name": "Burkina Faso", "short_name": "Burkina Faso", "iso2" : "BF", "iso3" : "BFA", "area" : "AFR", "income" : "LIC", "iso_num" : "854", "type" : "Developing" }
+{ "name": "Malawi", "short_name": "Malawi", "iso2" : "MW", "iso3" : "MWI", "area" : "AFR", "income" : "LIC", "iso_num" : "454", "type" : "Developing" }
+{ "name": "Rwanda", "short_name": "Rwanda", "iso2" : "RW", "iso3" : "RWA", "area" : "AFR", "income" : "LIC", "iso_num" : "646", "type" : "Developing" }
+{ "name": "Cameroon", "short_name": "Cameroon", "iso2" : "CM", "iso3" : "CMR", "area" : "AFR", "income" : "LMC", "iso_num" : "120", "type" : "Developing" }
+{ "name": "Zimbabwe", "short_name": "Zimbabwe", "iso2" : "ZW", "iso3" : "ZWE", "area" : "AFR", "income" : "LIC", "iso_num" : "716", "type" : "Developing" }
+{ "name": "Mali", "short_name": "Mali", "iso2" : "ML", "iso3" : "MLI", "area" : "AFR", "income" : "LIC", "iso_num" : "466", "type" : "Developing" }
+{ "name": "Ethiopia", "short_name": "Ethiopia", "iso2" : "ET", "iso3" : "ETH", "area" : "AFR", "income" : "LIC", "iso_num" : "231", "type" : "Developing" }
+{ "name": "Mexico", "short_name": "Mexico", "iso2" : "MX", "iso3" : "MEX", "area" : "LCN", "income" : "UMC", "iso_num" : "484", "type" : "Emerging" }
+{ "name": "Colombia", "short_name": "Colombia", "iso2" : "CO", "iso3" : "COL", "area" : "LCN", "income" : "UMC", "iso_num" : "170", "type" : "Emerging" }
+{ "name": "Brazil", "short_name": "Brazil", "iso2" : "BR", "iso3" : "BRA", "area" : "LCN", "income" : "UMC", "iso_num" : "076", "type" : "Emerging" }
+{ "name": "Costa Rica", "short_name": "Costa Rica", "iso2" : "CR", "iso3" : "CRI", "area" : "LCN", "income" : "UMC", "iso_num" : "188", "type" : "Emerging" }
+{ "name": "Argentina", "short_name": "Argentina", "iso2" : "AR", "iso3" : "ARG", "area" : "LCN", "income" : "UMC", "iso_num" : "032", "type" : "Emerging" }
+{ "name": "Peru", "short_name": "Peru", "iso2" : "PE", "iso3" : "PER", "area" : "LCN", "income" : "UMC", "iso_num" : "604", "type" : "Emerging" }
+{ "name": "Ecuador", "short_name": "Ecuador", "iso2" : "EC", "iso3" : "ECU", "area" : "LCN", "income" : "UMC", "iso_num" : "218", "type" : "Emerging" }
+{ "name": "Jamaica", "short_name": "Jamaica", "iso2" : "JM", "iso3" : "JAM", "area" : "LCN", "income" : "UMC", "iso_num" : "388", "type" : "Emerging" }
+{ "name": "Venezuela (Bolivarian Republic Of)", "short_name": "Venezuela", "iso2" : "VE", "iso3" : "VEN", "area" : "LCN", "income" : "UMC", "iso_num" : "862", "type" : "Emerging" }
+{ "name": "Malaysia", "short_name": "Malaysia", "iso2" : "MY", "iso3" : "MYS", "area" : "EAS", "income" : "UMC", "iso_num" : "458", "type" : "Emerging" }
+{ "name": "Philippines", "short_name": "Philippines", "iso2" : "PH", "iso3" : "PHL", "area" : "EAS", "income" : "LMC", "iso_num" : "608", "type" : "Developing" }
+{ "name": "Thailand", "short_name": "Thailand", "iso2" : "TH", "iso3" : "THA", "area" : "EAS", "income" : "UMC", "iso_num" : "764", "type" : "Emerging" }
+{ "name": "Indonesia", "short_name": "Indonesia", "iso2" : "ID", "iso3" : "IDN", "area" : "EAS", "income" : "LMC", "iso_num" : "360", "type" : "Developing" }
+{ "name": "India", "short_name": "India", "iso2" : "IN", "iso3" : "IND", "area" : "SAS", "income" : "LMC", "iso_num" : "356", "type" : "Developing" }
+{ "name": "China", "short_name": "China", "iso2" : "CN", "iso3" : "CHN", "area" : "EAS", "income" : "UMC", "iso_num" : "156", "type" : "Emerging" }
+{ "name": "Bangladesh", "short_name": "Bangladesh", "iso2" : "BD", "iso3" : "BGD", "area" : "SAS", "income" : "LIC", "iso_num" : "050", "type" : "Developing" }
+{ "name": "Nepal", "short_name": "Nepal", "iso2" : "NP", "iso3" : "NPL", "area" : "SAS", "income" : "LIC", "iso_num" : "524", "type" : "Developing" }
+{ "name": "Viet Nam", "short_name": "Viet Nam", "iso2" : "VN", "iso3" : "VNM", "area" : "EAS", "income" : "LMC", "iso_num" : "704", "type" : "Developing" }
+{ "name": "Pakistan", "short_name": "Pakistan", "iso2" : "PK", "iso3" : "PAK", "area" : "SAS", "income" : "LMC", "iso_num" : "586", "type" : "Developing" }
+{ "name": "Turkey", "short_name": "Turkey", "iso2" : "TR", "iso3" : "TUR", "area" : "ECS", "income" : "UMC", "iso_num" : "792", "type" : "Emerging" }
+{ "name": "Kazakhstan", "short_name": "Kazakhstan", "iso2" : "KZ", "iso3" : "KAZ", "area" : "ECS", "income" : "UMC", "iso_num" : "398", "type" : "Emerging" }
+{ "name": "Jordan", "short_name": "Jordan", "iso2" : "JO", "iso3" : "JOR", "area" : "MEA", "income" : "UMC", "iso_num" : "400", "type" : "Emerging" }
+{ "name": "Yemen", "short_name": "Yemen", "iso2" : "YE", "iso3" : "YEM", "area" : "MEA", "income" : "LMC", "iso_num" : "887", "type" : "Developing" }
+{ "name": "Haiti", "short_name": "Haiti", "iso2" : "HT", "iso3" : "HTI", "area" : "LCN", "income" : "LIC", "iso_num" : "332", "type" : "Developing" }
+{ "name": "Mozambique", "short_name": "Mozambique", "iso2" : "MZ", "iso3" : "MOZ", "area" : "AFR", "income" : "LIC", "iso_num" : "508", "type" : "Developing" }
+{ "name": "Myanmar", "short_name": "Myanmar", "iso2" : "MM", "iso3" : "MMR", "area" : "SAS", "income" : "LIC", "iso_num" : "104", "type" : "Developing" }
+{ "name": "Sierra Leone", "short_name": "Sierra Leone", "iso2" : "SL", "iso3" : "SLE", "area" : "AFR", "income" : "LIC", "iso_num" : "694", "type" : "Developing" }
