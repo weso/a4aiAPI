@@ -124,10 +124,10 @@ def list_subindices():
     return json_encoder(request, subindices)
 
 
-@app.route("/indicators/components")
-def list_components():
-    components = IndicatorRepository(url_root=request.url_root).find_indicators_components()
-    return json_encoder(request, components)
+# @app.route("/indicators/components")
+# def list_components():
+#     components = IndicatorRepository(url_root=request.url_root).find_indicators_components()
+#     return json_encoder(request, components)
 
 
 @app.route("/indicators/primary")
@@ -148,15 +148,15 @@ def show_indicator(indicator_code):
     return json_encoder(request, indicator)
 
 
-@app.route("/indicators/<indicator_code>/components")
-def list_indicator_components(indicator_code):
-    indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
-
-    if indicator is None:
-        return json_encoder(request, indicator)
-
-    components = IndicatorRepository(url_root=request.url_root).find_indicators_components(indicator)
-    return json_encoder(request, components)
+# @app.route("/indicators/<indicator_code>/components")
+# def list_indicator_components(indicator_code):
+#     indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
+#
+#     if indicator is None:
+#         return json_encoder(request, indicator)
+#
+#     components = IndicatorRepository(url_root=request.url_root).find_indicators_components(indicator)
+#     return json_encoder(request, components)
 
 
 @app.route("/indicators/<indicator_code>/indicators")
