@@ -15,6 +15,7 @@ from infrastructure.mongo_repos.area_repository import AreaRepository
 from infrastructure.mongo_repos.indicator_repository import IndicatorRepository
 from infrastructure.mongo_repos.observation_repository import ObservationRepository
 from infrastructure.mongo_repos.ranking_repository import RankingRepository
+from infrastructure.errors.errors import RepositoryError
 
 # bson
 from bson.json_util import dumps
@@ -24,13 +25,22 @@ from bson.json_util import dumps
 ##                                 JSONP DECORATOR                                      ##
 ##########################################################################################
 
-def json_response(request, data):
-    data = success(data)
+def json_response(data, request, status=200):
     json = dumps(data, ensure_ascii=False).encode('utf-8')
     callback = request.args.get('callback', False)
     if callback:
-        return Response(str(callback) + '(' + str(json) + ');', content_type="application/javascript; charset=utf-8")
-    return Response(json, content_type="application/json; charset=utf-8")
+        return Response(str(callback) + '(' + str(json) + ');', mimetype="application/javascript; charset=utf-8")
+    return Response(json, mimetype="application/json; charset=utf-8", status=status)
+
+
+def json_response_ok(request, data):
+    data = success(data)
+    return json_response(data, request)
+
+
+def json_response_error(request, data):
+    data = error(data)
+    return json_response(data, request, status=400)
 
 
 def json_encoder(request, data):
@@ -40,7 +50,7 @@ def json_encoder(request, data):
     else:
         data = data.to_dict()
 
-    return json_response(request, data)
+    return json_response_ok(request, data)
 
 
 ##########################################################################################
@@ -49,6 +59,14 @@ def json_encoder(request, data):
 
 def success(data):
     return {"success": True, "data": data}
+
+
+##########################################################################################
+##                                  ERROR FUNCTION                                      ##
+##########################################################################################
+
+def error(data):
+    return {"success": False, "error": data}
 
 ##########################################################################################
 ##                                        ROOT                                          ##
@@ -235,7 +253,7 @@ def list_observations_years():
 def list_observations_years_array():
     years = ObservationRepository(url_root=request.url_root).get_year_list()
     years_array = [year.value for year in years]
-    return json_response(request, years_array)
+    return json_response_ok(request, years_array)
 
 ##########################################################################################
 ##                                    VISUALISATIONS                                    ##
@@ -326,6 +344,11 @@ def num(s):
         return int(s)
     except ValueError:
         return 0
+
+@app.errorhandler(RepositoryError)
+def handle_repository_error(error):
+    return json_response_error(request, error.message)
+
 
 ##########################################################################################
 ##                                        MAIN                                          ##
