@@ -5,6 +5,7 @@
 from flask import Flask, request, render_template, Response
 import json
 from functools import wraps
+from rdflib.plugins.parsers.pyRdfa.extras.httpheader import content_type
 
 app = Flask(__name__)
 import sys
@@ -26,11 +27,11 @@ from bson.json_util import dumps
 
 def json_response(request, data):
     data = success(data)
-    json = dumps(data)
+    json = dumps(data, ensure_ascii=False).encode('utf-8')
     callback = request.args.get('callback', False)
     if callback:
-        return Response(str(callback) + '(' + str(json) + ');', mimetype="application/javascript")
-    return Response(json, mimetype="application/json")
+        return Response(str(callback) + '(' + str(json) + ');', mimetype="application/javascript; charset=utf-8")
+    return Response(json, mimetype="application/json; charset=utf-8")
 
 
 def json_encoder(request, data):
