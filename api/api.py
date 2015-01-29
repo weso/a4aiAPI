@@ -5,7 +5,6 @@
 from flask import Flask, request, render_template, Response
 import json
 from functools import wraps
-from rdflib.plugins.parsers.pyRdfa.extras.httpheader import content_type
 
 app = Flask(__name__)
 import sys
