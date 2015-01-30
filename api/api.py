@@ -218,15 +218,18 @@ def list_observations():
     observations = ObservationRepository(url_root=request.url_root).find_observations()
     return json_encoder(request, observations)
 
+
 @app.route("/linked-observations")
 def list_linked_observations():
     linked_obs = ObservationRepository(url_root=request.url_root).find_linked_observations()
     return json_encoder(request, linked_obs)
 
+
 @app.route("/observations/<indicator_code>")
 def list_observations_by_indicator(indicator_code):
     observations = ObservationRepository(url_root=request.url_root).find_observations(indicator_code)
     return json_encoder(request, observations)
+
 
 @app.route("/observations/<indicator_code>/<area_code>")
 def list_observations_by_indicator_and_country(indicator_code, area_code):
@@ -239,6 +242,32 @@ def list_observations_by_indicator_and_country_and_year(indicator_code, area_cod
     observations = ObservationRepository(url_root=request.url_root).find_observations(indicator_code, area_code, year)
     return json_encoder(request, observations)
 
+
+##########################################################################################
+##                                    OBSERVATIONS                                      ##
+##########################################################################################
+@app.route("/statistics")
+def list_observations_statistics():
+    statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics()
+    return json_encoder(request, statistics)
+
+
+@app.route("/statistics/<indicator_code>")
+def list_observations_by_indicator_statistics(indicator_code):
+    statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code)
+    return json_encoder(request, statistics)
+
+
+@app.route("/statistics/<indicator_code>/<area_code>")
+def list_observations_by_indicator_and_country_statistics(indicator_code, area_code):
+    statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code, area_code)
+    return json_encoder(request, statistics)
+
+
+@app.route("/statistics/<indicator_code>/<area_code>/<year>")
+def list_observations_by_indicator_and_country_and_year_statistics(indicator_code, area_code, year):
+    statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code, area_code, year)
+    return json_encoder(request, statistics)
 
 ##########################################################################################
 ##                                        YEARS                                         ##
