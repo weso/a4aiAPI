@@ -162,7 +162,7 @@ def list_secondary():
 
 @app.route("/indicators/<indicator_code>")
 def show_indicator(indicator_code):
-    indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
+    indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
     return json_encoder(request, indicator)
 
 
@@ -179,7 +179,7 @@ def show_indicator(indicator_code):
 
 @app.route("/indicators/<indicator_code>/indicators")
 def list_indicator_indicators(indicator_code):
-    indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
+    indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
     if indicator is None:
         return json_encoder(request, indicator)
@@ -190,7 +190,7 @@ def list_indicator_indicators(indicator_code):
 
 @app.route("/indicators/<indicator_code>/primary")
 def list_indicator_primary(indicator_code):
-    indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
+    indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
     if indicator is None:
         return json_encoder(request, indicator)
@@ -201,7 +201,7 @@ def list_indicator_primary(indicator_code):
 
 @app.route("/indicators/<indicator_code>/secondary")
 def list_indicator_secondary(indicator_code):
-    indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
+    indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
     if indicator is None:
         return json_encoder(request, indicator)
