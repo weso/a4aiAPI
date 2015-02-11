@@ -244,7 +244,7 @@ def list_observations_by_indicator_and_country_and_year(indicator_code, area_cod
 
 
 ##########################################################################################
-##                                    OBSERVATIONS                                      ##
+##                                      STATISTICS                                      ##
 ##########################################################################################
 @app.route("/statistics")
 def list_observations_statistics():
@@ -268,6 +268,65 @@ def list_observations_by_indicator_and_country_statistics(indicator_code, area_c
 def list_observations_by_indicator_and_country_and_year_statistics(indicator_code, area_code, year):
     statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code, area_code, year)
     return json_encoder(request, statistics)
+
+##########################################################################################
+##                                   VISUALISATION                                      ##
+##########################################################################################
+@app.route("/visualisations")
+def list_observations_visualisations():
+    visualisation = ObservationRepository(url_root=request.url_root).find_observations_visualisation()
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisations/<indicator_code>")
+def list_observations_by_indicator_visualisations(indicator_code):
+    visualisation = ObservationRepository(url_root=request.url_root).find_observations_visualisation(indicator_code)
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisations/<indicator_code>/<area_code>")
+def list_observations_by_indicator_and_country_visualisations(indicator_code, area_code):
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_visualisation(indicator_code, area_code)
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisations/<indicator_code>/<area_code>/<year>")
+def list_observations_by_indicator_and_country_and_year_visualisations(indicator_code, area_code, year):
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_visualisation(indicator_code, area_code, year)
+    return json_encoder(request, visualisation)
+
+
+##########################################################################################
+##                             VISUALISATION GROUPED BY AREA                            ##
+##########################################################################################
+@app.route("/visualisationsGroupedByArea")
+def list_observations_visualisations_grouped_by_area():
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_grouped_by_area_visualisation()
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisationsGroupedByArea/<indicator_code>")
+def list_observations_by_indicator_visualisations_grouped_by_area(indicator_code):
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_grouped_by_area_visualisation(indicator_code)
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisationsGroupedByArea/<indicator_code>/<area_code>")
+def list_observations_by_indicator_and_country_visualisations_grouped_by_area(indicator_code, area_code):
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_grouped_by_area_visualisation(indicator_code, area_code)
+    return json_encoder(request, visualisation)
+
+
+@app.route("/visualisationsGroupedByArea/<indicator_code>/<area_code>/<year>")
+def list_observations_by_indicator_and_country_and_year_visualisations_grouped_by_area(indicator_code, area_code, year):
+    visualisation = ObservationRepository(url_root=request.url_root)\
+        .find_observations_grouped_by_area_visualisation(indicator_code, area_code, year)
+    return json_encoder(request, visualisation)
 
 ##########################################################################################
 ##                                        YEARS                                         ##
