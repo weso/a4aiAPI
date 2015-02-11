@@ -7,3 +7,4 @@ itsdangerous==0.24
 pymongo==2.7.2
 pytz==2014.7
 wsgiref==0.1.2
+Flask-Cache=0.13.1
