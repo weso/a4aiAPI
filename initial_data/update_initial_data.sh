@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-db="webindex"
+db="a4ai"
 mongo $db --eval "db.areas.remove({})"
 mongo $db --eval "db.indicators.remove({})"
 mongo $db --eval "db.observations.remove({})"
