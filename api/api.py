@@ -14,7 +14,6 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/../../a4aiDom'))
 from infrastructure.mongo_repos.area_repository import AreaRepository
 from infrastructure.mongo_repos.indicator_repository import IndicatorRepository
 from infrastructure.mongo_repos.observation_repository import ObservationRepository
-from infrastructure.mongo_repos.ranking_repository import RankingRepository
 from infrastructure.errors.errors import RepositoryError
 from flask.ext.cache import Cache
 
@@ -157,12 +156,6 @@ def list_subindices():
     return json_encoder(request, subindices)
 
 
-# @app.route("/indicators/components")
-# def list_components():
-#     components = IndicatorRepository(url_root=request.url_root).find_indicators_components()
-#     return json_encoder(request, components)
-
-
 @app.route("/indicators/primary")
 @cache.memoize(timeout=TIMEOUT)
 def list_primary():
@@ -182,17 +175,6 @@ def list_secondary():
 def show_indicator(indicator_code):
     indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
     return json_encoder(request, indicator)
-
-
-# @app.route("/indicators/<indicator_code>/components")
-# def list_indicator_components(indicator_code):
-#     indicator = IndicatorRepository(url_root=request.url_root).find_indicators_by_code(indicator_code)
-#
-#     if indicator is None:
-#         return json_encoder(request, indicator)
-#
-#     components = IndicatorRepository(url_root=request.url_root).find_indicators_components(indicator)
-#     return json_encoder(request, components)
 
 
 @app.route("/indicators/<indicator_code>/indicators")
@@ -239,12 +221,6 @@ def list_indicator_secondary(indicator_code):
 def list_observations():
     observations = ObservationRepository(url_root=request.url_root).find_observations()
     return json_encoder(request, observations)
-
-
-@app.route("/linked-observations")
-def list_linked_observations():
-    linked_obs = ObservationRepository(url_root=request.url_root).find_linked_observations()
-    return json_encoder(request, linked_obs)
 
 
 @app.route("/observations/<indicator_code>")
@@ -375,6 +351,7 @@ def list_observations_years():
     years = ObservationRepository(url_root=request.url_root).get_year_list()
     return json_encoder(request, years)
 
+
 @app.route("/years/array")
 @cache.memoize(timeout=TIMEOUT)
 def list_observations_years_array():
@@ -382,95 +359,6 @@ def list_observations_years_array():
     years_array = [year.value for year in years]
     return json_response_ok(request, years_array)
 
-##########################################################################################
-##                                    VISUALISATIONS                                    ##
-##########################################################################################
-
-@app.route("/visualisations/<indicator_code>/<area_code>/<year>")
-def list_visualisations(indicator_code, area_code, year):
-    visualisations = ObservationRepository(url_root=request.url_root).find_visualisations(indicator_code, area_code, year)
-    return json_encoder(request, visualisations)
-
-##########################################################################################
-##                                       RANKINGS                                       ##
-##########################################################################################
-
-@app.route("/rankings")
-def list_last_rankings():
-    years = ObservationRepository(url_root=request.url_root).get_year_list()
-    year = years["data"][0]["value"]
-    rankings = RankingRepository(url_root=request.url_root).find_rankings(year)
-    return json_encoder(request, rankings)
-
-@app.route("/rankings/<year>")
-def list_rankings(year):
-    rankings = RankingRepository(url_root=request.url_root).find_rankings(year)
-    return json_encoder(request, rankings)
-
-##########################################################################################
-##                                         HOME                                        ##
-##########################################################################################
-
-@app.route("/home/<indicators>/<limits>/<tendencies>/<values>")
-def list_home(indicators, limits, tendencies, values):
-    years = ObservationRepository(url_root=request.url_root).get_year_array()
-
-    indicators = indicators.upper().strip().split(",")
-    limits = limits.upper().strip().split(",")
-    tendencies = tendencies.upper().strip().split(",")
-    values = values.upper().strip().split(",")
-
-    if years["success"] is True:
-        year = years["data"][0]
-        rankings = RankingRepository(url_root=request.url_root).find_rankings(year)
-        result = {
-            "rankings": rankings
-        }
-
-        for i in range(len(indicators)):
-            indicator = indicators[i]
-            limit = limits[i] if i < len(limits) else ""
-            tendency = tendencies[i] if i < len(tendencies) else -1
-            value = values[i] if i < len(values) else ""
-
-            index = str(i + 1)
-
-            observations = ObservationRepository(url_root=request.url_root).find_observations(indicator, "ALL", year)
-            observations = observations["data"] if observations["data"] else []
-
-            percentage = get_percentage(observations, limit, tendency) if limit else value
-
-            result["observations%s" % index] = observations
-            result["percentage%s" % index] = percentage
-
-    return json_encoder(request, result)
-
-def get_percentage(observations, limit, tendency):
-    count = 0
-    sum = 0
-    tendency = num(tendency)
-    limit = num(limit)
-
-    for observation in observations:
-        value = observation["value"]
-
-        if tendency > 0 and value >= limit:
-            sum = sum + 1
-
-        if tendency < 0 and value <= limit:
-            sum = sum + 1
-
-        count = count + 1
-
-    percentage = sum * 100.0 / count if count > 0 else 0
-
-    return round(percentage)
-
-def num(s):
-    try:
-        return int(s)
-    except ValueError:
-        return 0
 
 @app.errorhandler(RepositoryError)
 def handle_repository_error(error):
