@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Web Index Data API</title>
+		<title>A4AI Data API</title>
 		<style>
 			body {
 				padding: 0 1em;
@@ -75,9 +75,9 @@
 		</style>
 	</head>
 	<body>
-		<h1>Web Index Data API v1.0</title>
+		<h1>A4AI Data API v1.0</h1>
 		<h2>Introduction</h2>
-		This is the Web Index Data API. This API is based on RESTful principles. So you can access it through normal HTTP requests.
+		This is the A4AI Data API. This API is based on RESTful principles. So you can access it through normal HTTP requests.
 		<h2>Usage</h2>
 		Every API method returns a JSON object with the following fields:
 		<ul>
@@ -159,7 +159,7 @@
 				</ul>
 				<pre>
 					{
-						"children": [],
+					        "children": [],
 						"component": "COMMUNICATIONS_INFRASTRUCTURE",
 						"index": "INDEX",
 						"indicator": "ITU_G",
@@ -187,6 +187,53 @@
 					}
 				</pre>
 			</li>
+			<li>
+			    <h4>Statistics</h4>
+			    <p>Represents a set of statistics calculated from associated observations.</p>
+			    <pre>
+                     {
+                         "median_emerging": 5.666666666666667,
+                         "average_emerging": 943.053387592669,
+                         "average_developing": 398.2690439713437,
+                         "max": 76054,
+                         "average": 624.7355041168585,
+                         "min": 0,
+                         "median": 5,
+                         "median_developing": 4.5
+			         }
+			    </pre>
+			</li>
+			<li>
+			    <h4>Visualisations</h4>
+			    <p>Represents a set of observations with its associated statistics. It is equivalent to call statistics and observations in the same call. It also returns statistics for all countries, no matter what country was selected.</p>
+			    <pre>
+			        {
+			            "statistics": {...},
+			            "observations": [...],
+			            "statistics_all_areas": {...}
+			        }
+			    </pre>
+			</li>
+			<li>
+			    <h4>Visualisations Grouped by Area</h4>
+			    <p>Represents a set of visualisations grouped by an area or by a group of areas.</p>
+			    <pre>
+                    {
+                        "EGY": {
+                            "statistics": {...},
+                            "observations": [...],
+                        },
+                        "CHN": {
+                            "statistics": {...},
+                            "observations": [...],
+                        },
+                        .
+                        .
+                        .
+                        "statistics_all_areas": {...}
+                    }
+			    </pre>
+			</li>
 		</ul>
 		<h3>URI Schema</h3>
 		<h4>Areas</h4>
@@ -210,7 +257,7 @@
 				</p>
 			</li>
 			<li>
-				<a href="/api/areas/USA">/areas/&lt;area_code&gt;</a>
+				<a href="/api/areas/CHN">/areas/&lt;area_code&gt;</a>
 				<p>
 					Returns one area information.
 				</p>
@@ -219,7 +266,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="/api/areas/NAC/countries">/areas/&lt;area_code&gt;/countries</a>
+				<a href="/api/areas/AFR/countries">/areas/&lt;area_code&gt;/countries</a>
 				<p>
 					Returns the countries of one area.
 				</p>
@@ -252,12 +299,6 @@
 					List all subindices, each one contains its children.
 				</p>
 			</li>
-			<!--<li>
-				<a href="/api/indicators/components">/indicators/components</a>
-				<p>
-					List all components, each one contains its children.
-				</p>
-			</li>-->
 			<li>
 				<a href="/api/indicators/primary">/indicators/primary</a>
 				<p>
@@ -279,15 +320,6 @@
 					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
 				</ul>
 			</li>
-			<!--<li>
-				<a href="/api/indicators/INDEX/components">/indicators/&lt;indicator_code&gt;/components</a>
-				<p>
-					List the components below one subindex or the index.
-				</p>
-				<ul>
-					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the subindex or index.</li>
-				</ul>
-			</li>-->
 			<li>
 				<a href="/api/indicators/INDEX/indicators">/indicators/&lt;indicator_code&gt;/indicators</a>
 				<p>
@@ -359,6 +391,144 @@
 					<li>&lt;year&gt;: represents a year. e.g.: 2008</li>
 					<li>To enter more than one year we can use comma separated format. e.g.: <a href=/api/observations/ITU_A/USA/2008,2010>/observations/ITU_A/USA/2008,2010</a></li>
 					<li>We can specify a time range using hyphen. e.g.: <a href=/api/observations/ITU_A/USA/2008-2010>/observations/ITU_A/USA/2008-2010</a> List all the observation for the indicator ITU_A for USA from 2008 to 2010.</li>
+				</ul>
+			</li>
+		</ul>
+        <h4>Statistics</h4>
+		<ul class="schema">
+			<li>
+				<a href="/api/statistics">/statistics</a>
+				<p>
+					Show statistics for all observations. It makes too much calculation, NOT RECOMMENDED.
+				</p>
+			</li>
+			<li>
+				<a href=/api/statistics/ITU_G>/statistics/&lt;indicator_code&gt;</a>
+				<p>
+					Show statistics for one or more indicators.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/statistics/ITU_A,ITU_G>/statistics/ITU_A,ITU_G</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/statistics/ITU_G/USA>/statistics/&lt;indicator_code&gt;/&lt;area_code&gt;</a>
+				<p>
+					Show statistics for one or more indicators and for one or more areas.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/statistics/ITU_A,ITU_G/EGY>/statistics/ITU_A,ITU_G/EGY</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/statistics/ITU_A/CHN,EGY>/statistics/ITU_A/CHN,EGY</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/statistics/ITU_G/CHN/2014>/statistics/&lt;indicator_code&gt;/&lt;area_code&gt;/&lt;year&gt;</a>
+				<p>
+					Show statistics for one or more indicators and for one or more areas and for one or more years.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/statistics/ITU_A,ITU_G/CHN/2014>/statistics/ITU_A,ITU_G/CHN/2014</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/statistics/ITU_A/CHN,EGY/2014>/statistics/ITU_A/CHN,EGY/2014</a></li>
+					<li>&lt;year&gt;: represents a year. e.g.: 2014</li>
+					<li>To enter more than one year we can use comma separated format. e.g.: <a href=/api/statistics/ITU_A/CHN/2008,2014>/statistics/ITU_A/CHN/2008,2014</a></li>
+					<li>We can specify a time range using hyphen. e.g.: <a href=/api/statistics/ITU_A/CHN/2008-2014>/statistics/ITU_A/CHN/2008-2014</a> statistics for the indicator ITU_A for CHN from 2008 to 2014.</li>
+				</ul>
+			</li>
+		</ul>
+       <h4>Visualisations</h4>
+		<ul class="schema">
+			<li>
+				<a href="/api/visualisations">/visualisations</a>
+				<p>
+					Show visualisations for all observations. It makes too much calculation and download a lot of data, NOT RECOMMENDED.
+				</p>
+			</li>
+			<li>
+				<a href=/api/visualisations/ITU_G>/visualisations/&lt;indicator_code&gt;</a>
+				<p>
+					Show visualisations for one or more indicators.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisations/ITU_A,ITU_G>/visualisations/ITU_A,ITU_G</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/visualisations/ITU_G/USA>/visualisations/&lt;indicator_code&gt;/&lt;area_code&gt;</a>
+				<p>
+					Show visualisations for one or more indicators and for one or more areas.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisations/ITU_A,ITU_G/EGY>/visualisations/ITU_A,ITU_G/EGY</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/visualisations/ITU_A/CHN,EGY>/visualisations/ITU_A/CHN,EGY</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/visualisations/ITU_G/CHN/2014>/visualisations/&lt;indicator_code&gt;/&lt;area_code&gt;/&lt;year&gt;</a>
+				<p>
+					Show visualisations for one or more indicators and for one or more areas and for one or more years.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisations/ITU_A,ITU_G/CHN/2014>/visualisations/ITU_A,ITU_G/CHN/2014</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/visualisations/ITU_A/CHN,EGY/2014>/visualisations/ITU_A/CHN,EGY/2014</a></li>
+					<li>&lt;year&gt;: represents a year. e.g.: 2014</li>
+					<li>To enter more than one year we can use comma separated format. e.g.: <a href=/api/visualisations/ITU_A/CHN/2008,2014>/visualisations/ITU_A/CHN/2008,2014</a></li>
+					<li>We can specify a time range using hyphen. e.g.: <a href=/api/visualisations/ITU_A/CHN/2008-2014>/visualisations/ITU_A/CHN/2008-2014</a> visualisations for the indicator ITU_A for CHN from 2008 to 2014.</li>
+				</ul>
+			</li>
+		</ul>
+        <h4>Visualisations Grouped by Area</h4>
+		<ul class="schema">
+			<li>
+				<a href="/api/visualisationsGroupedByArea">/visualisationsGroupedByArea</a>
+				<p>
+					Show visualisations grouped by area for all observations. It makes too much calculation and download a lot of data, NOT RECOMMENDED.
+				</p>
+			</li>
+			<li>
+				<a href=/api/visualisationsGroupedByArea/ITU_G>/visualisationsGroupedByArea/&lt;indicator_code&gt;</a>
+				<p>
+					Show visualisations grouped by area for one or more indicators.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A,ITU_G>/visualisationsGroupedByArea/ITU_A,ITU_G</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/visualisationsGroupedByArea/ITU_G/USA>/visualisationsGroupedByArea/&lt;indicator_code&gt;/&lt;area_code&gt;</a>
+				<p>
+					Show visualisations grouped by country for one or more indicators and for one or more areas.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A,ITU_G/EGY>/visualisationsGroupedByArea/ITU_A,ITU_G/EGY</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A/CHN,EGY>/visualisationsGroupedByArea/ITU_A/CHN,EGY</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href=/api/visualisationsGroupedByArea/ITU_G/CHN/2014>/visualisationsGroupedByArea/&lt;indicator_code&gt;/&lt;area_code&gt;/&lt;year&gt;</a>
+				<p>
+					Show visualisations grouped by country for one or more indicators and for one or more areas and for one or more years.
+				</p>
+				<ul>
+					<li><a href="#indicator_code">&lt;indicator_code&gt;</a>: code to identify the indicator.</li>
+					<li>To enter more than one indicator use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A,ITU_G/CHN/2014>/visualisationsGroupedByArea/ITU_A,ITU_G/CHN/2014</a></li>
+					<li><a href="#area_code">&lt;area_code&gt;</a>: code to identify the area.</li>
+					<li>To enter more than one area use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A/CHN,EGY/2014>/visualisationsGroupedByArea/ITU_A/CHN,EGY/2014</a></li>
+					<li>&lt;year&gt;: represents a year. e.g.: 2014</li>
+					<li>To enter more than one year we can use comma separated format. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A/CHN/2008,2014>/visualisationsGroupedByArea/ITU_A/CHN/2008,2014</a></li>
+					<li>We can specify a time range using hyphen. e.g.: <a href=/api/visualisationsGroupedByArea/ITU_A/CHN/2008-2014>/visualisationsGroupedByArea/ITU_A/CHN/2008-2014</a> visualisations grouped by country for the indicator ITU_A for CHN from 2008 to 2014.</li>
 				</ul>
 			</li>
 		</ul>
