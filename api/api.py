@@ -27,6 +27,7 @@ cache.init_app(app)
 
 TIMEOUT = 30  # timeout to clean cache in seconds
 
+
 ##########################################################################################
 ##                                 JSONP DECORATOR                                      ##
 ##########################################################################################
@@ -59,6 +60,17 @@ def json_encoder(request, data):
     return json_response_ok(request, data)
 
 
+def area_json_encoder(request, data):
+    if request.args.get('info') == 'false':
+        if isinstance(data, list):
+            data = [data_element.to_dict_without_info() for data_element in data]
+        else:
+            data = data.to_dict_without_info()
+        return json_response_ok(request, data)
+    else:
+        return json_encoder(request, data)
+
+
 ##########################################################################################
 ##                                SUCCESS FUNCTION                                      ##
 ##########################################################################################
@@ -73,6 +85,17 @@ def success(data):
 
 def error(data):
     return {"success": False, "error": data}
+
+
+##########################################################################################
+##                                  CACHE FUNCTION                                      ##
+##########################################################################################
+
+def make_cache_key(*args, **kwargs):
+    path = request.path
+    args = str(hash(frozenset(request.args.items())))
+    return (path + args).encode('utf-8')
+
 
 ##########################################################################################
 ##                                        ROOT                                          ##
@@ -89,45 +112,45 @@ def index():
 ##########################################################################################
 
 @app.route("/areas")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_areas():
     """List all areas (countries and continents)"""
     order = request.args.get('orderBy')
 
     areas = AreaRepository(url_root=request.url_root).find_areas(order)
 
-    return json_encoder(request, areas)
+    return area_json_encoder(request, areas)
 
 
 @app.route("/areas/countries")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_countries():
     order = request.args.get('orderBy')
     countries = AreaRepository(url_root=request.url_root).find_countries(order)
-    return json_encoder(request, countries)
+    return area_json_encoder(request, countries)
 
 
 @app.route("/areas/continents")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_continents():
     order = request.args.get('orderBy')
     continents = AreaRepository(url_root=request.url_root).find_continents(order)
-    return json_encoder(request, continents)
+    return area_json_encoder(request, continents)
 
 
 @app.route("/areas/<area_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def show_area(area_code):
     area = AreaRepository(url_root=request.url_root).find_countries_by_code_or_income(area_code)
-    return json_encoder(request, area)
+    return area_json_encoder(request, area)
 
 
 @app.route("/areas/<area_code>/countries")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def show_area_countries(area_code):
     order = request.args.get('orderBy')
     countries = AreaRepository(url_root=request.url_root).find_countries_by_continent_or_income_or_type(area_code, order)
-    return json_encoder(request, countries)
+    return area_json_encoder(request, countries)
 
 
 ##########################################################################################
@@ -135,7 +158,7 @@ def show_area_countries(area_code):
 ##########################################################################################
 
 @app.route("/indicators")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_indicators():
     indicators = IndicatorRepository(url_root=request.url_root).find_indicators()
 
@@ -143,42 +166,42 @@ def list_indicators():
 
 
 @app.route("/indicators/index")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def show_index():
     _index = IndicatorRepository(url_root=request.url_root).find_indicators_index()
     return json_encoder(request, _index)
 
 
 @app.route("/indicators/subindices")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_subindices():
     subindices = IndicatorRepository(url_root=request.url_root).find_indicators_sub_indexes()
     return json_encoder(request, subindices)
 
 
 @app.route("/indicators/primary")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_primary():
     primary = IndicatorRepository(url_root=request.url_root).find_indicators_primary()
     return json_encoder(request, primary)
 
 
 @app.route("/indicators/secondary")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_secondary():
     secondary = IndicatorRepository(url_root=request.url_root).find_indicators_secondary()
     return json_encoder(request, secondary)
 
 
 @app.route("/indicators/<indicator_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def show_indicator(indicator_code):
     indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
     return json_encoder(request, indicator)
 
 
 @app.route("/indicators/<indicator_code>/indicators")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_indicator_indicators(indicator_code):
     indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
@@ -190,7 +213,7 @@ def list_indicator_indicators(indicator_code):
 
 
 @app.route("/indicators/<indicator_code>/primary")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_indicator_primary(indicator_code):
     indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
@@ -202,7 +225,7 @@ def list_indicator_primary(indicator_code):
 
 
 @app.route("/indicators/<indicator_code>/secondary")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_indicator_secondary(indicator_code):
     indicator = IndicatorRepository(url_root=request.url_root).find_indicator_by_code(indicator_code)
 
@@ -216,29 +239,39 @@ def list_indicator_secondary(indicator_code):
 ##########################################################################################
 ##                                    OBSERVATIONS                                      ##
 ##########################################################################################
+@app.route("/areasInfo")
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
+def areas_info():
+    areas_info = AreaRepository(url_root=request.url_root).get_areas_info()
+    return json_encoder(request, areas_info)
+
+
+##########################################################################################
+##                                    OBSERVATIONS                                      ##
+##########################################################################################
 @app.route("/observations")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations():
     observations = ObservationRepository(url_root=request.url_root).find_observations()
     return json_encoder(request, observations)
 
 
 @app.route("/observations/<indicator_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator(indicator_code):
     observations = ObservationRepository(url_root=request.url_root).find_observations(indicator_code)
     return json_encoder(request, observations)
 
 
 @app.route("/observations/<indicator_code>/<area_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country(indicator_code, area_code):
     observations = ObservationRepository(url_root=request.url_root).find_observations(indicator_code, area_code)
     return json_encoder(request, observations)
 
 
 @app.route("/observations/<indicator_code>/<area_code>/<year>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_and_year(indicator_code, area_code, year):
     observations = ObservationRepository(url_root=request.url_root).find_observations(indicator_code, area_code, year)
     return json_encoder(request, observations)
@@ -248,28 +281,28 @@ def list_observations_by_indicator_and_country_and_year(indicator_code, area_cod
 ##                                      STATISTICS                                      ##
 ##########################################################################################
 @app.route("/statistics")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_statistics():
     statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics()
     return json_encoder(request, statistics)
 
 
 @app.route("/statistics/<indicator_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_statistics(indicator_code):
     statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code)
     return json_encoder(request, statistics)
 
 
 @app.route("/statistics/<indicator_code>/<area_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_statistics(indicator_code, area_code):
     statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code, area_code)
     return json_encoder(request, statistics)
 
 
 @app.route("/statistics/<indicator_code>/<area_code>/<year>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_and_year_statistics(indicator_code, area_code, year):
     statistics = ObservationRepository(url_root=request.url_root).find_observations_statistics(indicator_code, area_code, year)
     return json_encoder(request, statistics)
@@ -278,21 +311,21 @@ def list_observations_by_indicator_and_country_and_year_statistics(indicator_cod
 ##                                   VISUALISATION                                      ##
 ##########################################################################################
 @app.route("/visualisations")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_visualisations():
     visualisation = ObservationRepository(url_root=request.url_root).find_observations_visualisation()
     return json_encoder(request, visualisation)
 
 
 @app.route("/visualisations/<indicator_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_visualisations(indicator_code):
     visualisation = ObservationRepository(url_root=request.url_root).find_observations_visualisation(indicator_code)
     return json_encoder(request, visualisation)
 
 
 @app.route("/visualisations/<indicator_code>/<area_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_visualisations(indicator_code, area_code):
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_visualisation(indicator_code, area_code)
@@ -300,7 +333,7 @@ def list_observations_by_indicator_and_country_visualisations(indicator_code, ar
 
 
 @app.route("/visualisations/<indicator_code>/<area_code>/<year>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_and_year_visualisations(indicator_code, area_code, year):
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_visualisation(indicator_code, area_code, year)
@@ -311,7 +344,7 @@ def list_observations_by_indicator_and_country_and_year_visualisations(indicator
 ##                             VISUALISATION GROUPED BY AREA                            ##
 ##########################################################################################
 @app.route("/visualisationsGroupedByArea")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_visualisations_grouped_by_area():
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_grouped_by_area_visualisation()
@@ -319,7 +352,7 @@ def list_observations_visualisations_grouped_by_area():
 
 
 @app.route("/visualisationsGroupedByArea/<indicator_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_visualisations_grouped_by_area(indicator_code):
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_grouped_by_area_visualisation(indicator_code)
@@ -327,7 +360,7 @@ def list_observations_by_indicator_visualisations_grouped_by_area(indicator_code
 
 
 @app.route("/visualisationsGroupedByArea/<indicator_code>/<area_code>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_visualisations_grouped_by_area(indicator_code, area_code):
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_grouped_by_area_visualisation(indicator_code, area_code)
@@ -335,7 +368,7 @@ def list_observations_by_indicator_and_country_visualisations_grouped_by_area(in
 
 
 @app.route("/visualisationsGroupedByArea/<indicator_code>/<area_code>/<year>")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_by_indicator_and_country_and_year_visualisations_grouped_by_area(indicator_code, area_code, year):
     visualisation = ObservationRepository(url_root=request.url_root)\
         .find_observations_grouped_by_area_visualisation(indicator_code, area_code, year)
@@ -346,14 +379,14 @@ def list_observations_by_indicator_and_country_and_year_visualisations_grouped_b
 ##########################################################################################
 
 @app.route("/years")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_years():
     years = ObservationRepository(url_root=request.url_root).get_year_list()
     return json_encoder(request, years)
 
 
 @app.route("/years/array")
-@cache.memoize(timeout=TIMEOUT)
+@cache.cached(timeout=TIMEOUT, key_prefix=make_cache_key)
 def list_observations_years_array():
     years = ObservationRepository(url_root=request.url_root).get_year_list()
     years_array = [year.value for year in years]
